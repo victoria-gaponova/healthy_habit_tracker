@@ -36,3 +36,18 @@ class Habit(models.Model):
     time_to_complete_habit = models.IntegerField(
         help_text='время, которое предположительно потратит пользователь на выполнение привычки')
     is_public = models.BooleanField(default=False, help_text='признак публичности привычки')
+
+    def __repr__(self):
+        """Возвращает строковое представление объекта привычки.
+
+        Returns:
+            str: Строковое представление объекта привычки."""
+        return (f"Habit({self.place}, {self.time}, {self.action}, {self.is_pleasant_habit}, "
+                f"{self.related_habit}, {self.periodicity}, {self.is_public})")
+
+    def __str__(self):
+        """ Возвращает строку, описывающую привычку.
+
+        Returns:
+            str: Строка с описанием привычки."""
+        return f"Я буду {self.action} в {self.time} в {self.place}"
