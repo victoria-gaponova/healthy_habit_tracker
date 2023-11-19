@@ -35,10 +35,12 @@ class UserLoginSerializer(serializers.Serializer):
     password = serializers.CharField(style={'input_type': 'password'}, trim_whitespace=False)
 
     def validate(self, data):
+        # Извлечение значения электронной почты и пароля из предоставленных данных.
         email = data.get('email')
         password = data.get('password')
 
         if email and password:
+            # Попытка аутентификации пользователя с использованием предоставленной электронной почты и пароля.
             user = authenticate(request=self.context.get('request'), email=email, password=password)
 
             if not user:
@@ -49,6 +51,7 @@ class UserLoginSerializer(serializers.Serializer):
             msg = 'Must include "email" and "password".'
             raise serializers.ValidationError(msg, code='autorization')
 
+        # Сохранение объекта пользователя в словаре data.
         data['user'] = user
 
         return data
