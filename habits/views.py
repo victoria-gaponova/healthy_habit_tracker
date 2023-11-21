@@ -1,15 +1,18 @@
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 
 from habits.models import Habit
 from habits.serializers import HabitSerializer
+from users.permissions import IsOwner
 
 
 class HabitListCreateAPIView(generics.CreateAPIView):
     """Представление для создания  и просмотра список привычек пользователя
         Attributes:
-            serializer_class (LessonSerializer): Сериализатор, используемый для преобразования объектов привычек в JSON.
+            serializer_class (HabitSerializer): Сериализатор, используемый для преобразования объектов привычек в JSON.
     """
     serializer_class = HabitSerializer
+    permission_classes = [IsAuthenticated, IsOwner]
 
     def get_queryset(self):
         """
@@ -33,6 +36,7 @@ class PublicHabitListAPIView(generics.ListAPIView):
             """
     queryset = Habit.objects.filter(is_public=True)
     serializer_class = HabitSerializer
+    permission_classes = [IsAuthenticated]
 
 
 class HabitDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
@@ -43,6 +47,7 @@ class HabitDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = Habit.objects.all()
     serializer_class = HabitSerializer
+    permission_classes = [IsAuthenticated, IsOwner]
 
     def get_queryset(self):
         """
