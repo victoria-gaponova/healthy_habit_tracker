@@ -2,6 +2,8 @@ from django.db import models
 
 from users.models import User
 
+NULLABLE = {'blank': True, 'null': True}
+
 
 class Habit(models.Model):
     """
@@ -28,11 +30,12 @@ class Habit(models.Model):
     time = models.TimeField(auto_now=False, auto_now_add=False, help_text='время, когда необходимо выполнять привычку')
     action = models.CharField(max_length=300, help_text='действие, которое представляет из себя привычка')
     is_pleasant_habit = models.BooleanField(default=False, help_text='признак приятной привычки')
-    related_habit = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True,
+    related_habit = models.ForeignKey('self', on_delete=models.CASCADE, **NULLABLE,
                                       help_text='связанная привычка,если таковая имеется')
     periodicity = models.CharField(max_length=20, choices=PERIODICITY_CHOICES, default='daily',
                                    help_text='периодичность выполнения привычки для напоминания в днях')
-    reward = models.CharField(max_length=300, help_text='вознаграждение для пользователя за выполнение привычки')
+    reward = models.CharField(max_length=300, **NULLABLE,
+                              help_text='вознаграждение для пользователя за выполнение привычки')
     time_to_complete_habit = models.IntegerField(
         help_text='время, которое предположительно потратит пользователь на выполнение привычки')
     is_public = models.BooleanField(default=False, help_text='признак публичности привычки')
