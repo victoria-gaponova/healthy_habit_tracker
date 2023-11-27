@@ -16,10 +16,10 @@ def validate_time_to_complete_habit(value):
 def validate_pleasant_habit(value):
     """Валидатор: У приятной привычки не может быть вознаграждения или связанной привычки."""
     if value.get('is_pleasant_habit') and value.get('reward') or value.get('related_habit'):
-        serializers.ValidationError("A pleasant habit should not have a reward or a related habit.")
+        raise serializers.ValidationError("A pleasant habit should not have a reward or a related habit.")
 
 
 def validate_periodicity(value):
     """Валидатор: Нельзя выполнять привычку реже, чем 1 раз в 7 дней."""
     if value.get('periodicity') not in ['daily', 'weekly']:
-        serializers.ValidationError("The minimum periodicity is once in 7 days for non-daily habits.")
+        raise serializers.ValidationError("The minimum periodicity is once in 7 days for non-daily habits.")
