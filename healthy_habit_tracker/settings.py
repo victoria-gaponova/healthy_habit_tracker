@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework_simplejwt',
+    "rest_framework.authtoken",
     'drf_yasg',
     'corsheaders',
     'django_celery_beat',
@@ -133,7 +134,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.User'
-
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
 # cache
 CACHES = {
     "default": {
@@ -170,18 +172,20 @@ CELERY_TASK_SIRIALIZER = 'json'
 CELERY_BEAT_SCHEDULE = {
     'task-daily': {
         'task': 'habits.tasks.daily_send_message',  # Путь к задаче
-        'schedule': timedelta(seconds=24),  # Расписание выполнения задачи (например, каждые 10 минут)
+        'schedule': timedelta(hours=24),  # Расписание выполнения задачи (например, каждые 10 минут)
     },
     'task-weekly': {
         'task': 'habits.tasks.weekly_send_message',  # Путь к задаче
-        'schedule': timedelta(seconds=7),  # Расписание выполнения задачи (например, каждые 10 минут)
+        'schedule': timedelta(days=7),  # Расписание выполнения задачи (например, каждые 10 минут)
     },
 }
 
 # Настройка JWT-токена
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
