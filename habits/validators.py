@@ -9,7 +9,7 @@ def validate_related_habit_and_reward(value):
 
 def validate_time_to_complete_habit(value):
     """Валидатор: Время выполнения должно быть не больше 120 секунд."""
-    if value.get('time_to_complete_habit'):
+    if value.get('time_to_complete_habit') > 120:
         raise serializers.ValidationError("Time to complete habit should not exceed 120 seconds.")
 
 
