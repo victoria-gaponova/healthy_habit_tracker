@@ -35,7 +35,7 @@ class UserLoginViewSet(viewsets.ViewSet):
         login(request, user)
 
         # Получается или создается токен для пользователя с использованием модели токена DRF (Token)
-        token, created = Token.objects.get_or_created(user=user)
+        token, created = Token.objects.get_or_create(user=user)
 
         user_serializer = UserSerializer(user)
 
@@ -59,7 +59,7 @@ class UserRegistrationViewSet(viewsets.ViewSet):
     serializer_class = UserRegistrationSerializer
 
     @swagger_auto_schema(request_body=UserRegistrationSerializer)
-    def create(self, request, args, **kwargs):
+    def create(self, request, *args, **kwargs):
         serializer = self.serializer_class(
             data=request.data, context={"request": request}
         )
