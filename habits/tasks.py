@@ -8,13 +8,11 @@ from habits.services import sending_notifications_to_telegram
 def daily_send_message():
     habits = Habit.objects.filter(periodicity='daily')
     for habit in habits:
-        chat_id = habit.user.chat_id
-        sending_notifications_to_telegram(chat_id, habit)
+        sending_notifications_to_telegram(habit)
 
 
 @shared_task
 def weekly_send_message():
     habits = Habit.objects.filter(periodicity='weekly')
     for habit in habits:
-        chat_id = habit.user.chat_id
-        sending_notifications_to_telegram(chat_id, habit)
+        sending_notifications_to_telegram(habit)

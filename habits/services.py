@@ -1,13 +1,8 @@
 import os
 
-import telebot
+import requests
 
-TELEGRAM_API_TOKEN = os.getenv('TELEGRAM_API_TOKEN')
-
-
-def sending_notifications_to_telegram(chat_id, habit):
+def sending_notifications_to_telegram(habit):
     """Отправление уведомления пользователю о привычке в телеграм"""
-    bot = telebot.TeleBot(TELEGRAM_API_TOKEN, parse_mode=None)
-    bot.send_message(chat_id,
-                     text=f'Пришло время привычки : {habit.action}.'
-                          f'Привычку необходимо выполнять в {habit.place} в {habit.time}')
+    url = f"https://api.telegram.org/bot{os.getenv('TELEGRAM_API_TOKEN')}/sendMessage?chat_id={habit.user.chat_id}&text={habit}"
+    requests.get(url).json()
