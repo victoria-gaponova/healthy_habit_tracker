@@ -9,9 +9,10 @@ from users.permissions import IsOwner
 
 class HabitListCreateAPIView(generics.CreateAPIView):
     """Представление для создания  и просмотра список привычек пользователя
-        Attributes:
-            serializer_class (HabitSerializer): Сериализатор, используемый для преобразования объектов привычек в JSON.
+    Attributes:
+        serializer_class (HabitSerializer): Сериализатор, используемый для преобразования объектов привычек в JSON.
     """
+
     serializer_class = HabitSerializer
     permission_classes = [IsAuthenticated, IsOwner]
     pagination_class = HabitPagination
@@ -24,18 +25,17 @@ class HabitListCreateAPIView(generics.CreateAPIView):
         return Habit.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
-        """Метод для автоматического сохранения пользователя, создающего привычку.
-
-        """
+        """Метод для автоматического сохранения пользователя, создающего привычку."""
         serializer.save(user=self.request.user)
 
 
 class PublicHabitListAPIView(generics.ListAPIView):
     """Представлениe для просмотра списка публичных привычек
-        Attributes:
-            queryset (QuerySet): Набор объектов привычек.
-            serializer_class (LessonSerializer): Сериализатор, используемый для преобразования объектов привычек в JSON.
-            """
+    Attributes:
+        queryset (QuerySet): Набор объектов привычек.
+        serializer_class (LessonSerializer): Сериализатор, используемый для преобразования объектов привычек в JSON.
+    """
+
     queryset = Habit.objects.filter(is_public=True)
     serializer_class = HabitSerializer
     permission_classes = [IsAuthenticated]
@@ -44,10 +44,11 @@ class PublicHabitListAPIView(generics.ListAPIView):
 
 class HabitDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     """Представление для просмотра, обновления и удаления привычки
-        Attributes:
-            queryset (QuerySet): Набор объектов привычек.
-            serializer_class (LessonSerializer): Сериализатор, используемый для преобразования объектов привычек в JSON.
+    Attributes:
+        queryset (QuerySet): Набор объектов привычек.
+        serializer_class (LessonSerializer): Сериализатор, используемый для преобразования объектов привычек в JSON.
     """
+
     queryset = Habit.objects.all()
     serializer_class = HabitSerializer
     permission_classes = [IsAuthenticated, IsOwner]

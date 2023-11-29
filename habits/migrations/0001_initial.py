@@ -6,7 +6,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -15,19 +14,88 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Habit',
+            name="Habit",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('place', models.CharField(help_text='место, в котором необходимо выполнять привычку', max_length=300)),
-                ('time', models.TimeField(help_text='время, когда необходимо выполнять привычку')),
-                ('action', models.CharField(help_text='действие, которое представляет из себя привычка', max_length=300)),
-                ('is_pleasant_habit', models.BooleanField(default=False, help_text='признак приятной привычки')),
-                ('periodicity', models.CharField(choices=[('daily', 'Ежедневная'), ('weekly', 'Еженедельная')], default='daily', help_text='периодичность выполнения привычки для напоминания в днях', max_length=20)),
-                ('reward', models.CharField(help_text='вознаграждение для пользователя за выполнение привычки', max_length=300)),
-                ('time_to_complete_habit', models.IntegerField(help_text='время, которое предположительно потратит пользователь на выполнение привычки')),
-                ('is_public', models.BooleanField(default=False, help_text='признак публичности привычки')),
-                ('related_habit', models.ForeignKey(blank=True, help_text='связанная привычка,если таковая имеется', null=True, on_delete=django.db.models.deletion.CASCADE, to='habits.habit')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "place",
+                    models.CharField(
+                        help_text="место, в котором необходимо выполнять привычку",
+                        max_length=300,
+                    ),
+                ),
+                (
+                    "time",
+                    models.TimeField(
+                        help_text="время, когда необходимо выполнять привычку"
+                    ),
+                ),
+                (
+                    "action",
+                    models.CharField(
+                        help_text="действие, которое представляет из себя привычка",
+                        max_length=300,
+                    ),
+                ),
+                (
+                    "is_pleasant_habit",
+                    models.BooleanField(
+                        default=False, help_text="признак приятной привычки"
+                    ),
+                ),
+                (
+                    "periodicity",
+                    models.CharField(
+                        choices=[("daily", "Ежедневная"), ("weekly", "Еженедельная")],
+                        default="daily",
+                        help_text="периодичность выполнения привычки для напоминания в днях",
+                        max_length=20,
+                    ),
+                ),
+                (
+                    "reward",
+                    models.CharField(
+                        help_text="вознаграждение для пользователя за выполнение привычки",
+                        max_length=300,
+                    ),
+                ),
+                (
+                    "time_to_complete_habit",
+                    models.IntegerField(
+                        help_text="время, которое предположительно потратит пользователь на выполнение привычки"
+                    ),
+                ),
+                (
+                    "is_public",
+                    models.BooleanField(
+                        default=False, help_text="признак публичности привычки"
+                    ),
+                ),
+                (
+                    "related_habit",
+                    models.ForeignKey(
+                        blank=True,
+                        help_text="связанная привычка,если таковая имеется",
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="habits.habit",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]
