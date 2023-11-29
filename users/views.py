@@ -1,11 +1,14 @@
 from django.contrib.auth import login
-from django.shortcuts import render
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets, status
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 
-from users.serializers import UserLoginSerializer, UserSerializer, UserRegistrationSerializer
+from users.serializers import (
+    UserLoginSerializer,
+    UserSerializer,
+    UserRegistrationSerializer,
+)
 
 
 class UserLoginViewSet(viewsets.ViewSet):
@@ -21,15 +24,18 @@ class UserLoginViewSet(viewsets.ViewSet):
     Returns:
         Response: Ответ, содержащий токен и данные пользователя.
     """
+
     serializer_class = UserLoginSerializer
 
     @swagger_auto_schema(request_body=UserLoginSerializer)
     def create(self, request, *args, **kwargs):
         # Создается экземпляр сериализатора (UserLoginSerializer) с переданными данными запроса и контекстом запроса.
-        serializer = self.serializer_class(data=request.data, context={'request': request})
+        serializer = self.serializer_class(
+            data=request.data, context={"request": request}
+        )
         serializer.is_valid(raise_exception=True)
         # Извлекается объект пользователя из валидированных данных сериализатора.
-        user = serializer.validated_data['user']
+        user = serializer.validated_data["user"]
 
         # Аутентификация пользователя в системе
         login(request, user)
@@ -39,7 +45,10 @@ class UserLoginViewSet(viewsets.ViewSet):
 
         user_serializer = UserSerializer(user)
 
-        return Response({'token': token.key, 'user': user_serializer.data}, status=status.HTTP_200_OK)
+        return Response(
+            {"token": token.key, "user": user_serializer.data},
+            status=status.HTTP_200_OK,
+        )
 
 
 class UserRegistrationViewSet(viewsets.ViewSet):

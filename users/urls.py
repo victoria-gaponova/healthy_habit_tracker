@@ -7,12 +7,12 @@ from users.views import UserLoginViewSet, UserRegistrationViewSet
 app_name = UsersConfig.name
 
 urlpatterns = [
-    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('login/', UserLoginViewSet.as_view({'post': 'create'}), name='user-login'),
-    path('register/',
-         UserRegistrationViewSet.as_view({"post": "create"}),
+    path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("login/", UserLoginViewSet.as_view({"post": "create"}), name="user-login"),
+    path(
+        "register/",
+        UserRegistrationViewSet.as_view({"post": "create"}),
         name="user-register",
     ),
-
-    ]
+]
