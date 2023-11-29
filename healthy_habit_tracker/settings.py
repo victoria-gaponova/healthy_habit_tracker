@@ -176,13 +176,13 @@ CELERY_BEAT_SCHEDULE = {
         "task": "habits.tasks.daily_send_message",  # Путь к задаче
         "schedule": timedelta(
             hours=24
-        ),  # Расписание выполнения задачи (например, каждые 10 минут)
+        ),  # Расписание выполнения задачи (каждые 24 часа)
     },
     "task-weekly": {
         "task": "habits.tasks.weekly_send_message",  # Путь к задаче
         "schedule": timedelta(
             days=7
-        ),  # Расписание выполнения задачи (например, каждые 10 минут)
+        ),  # Расписание выполнения задачи (каждые 7 дней)
     },
 }
 
