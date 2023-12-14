@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15.3
+    container_name: healthy_habit_tracker_db
+    env_file:
+      - .env-non-dev
+    volumes:
+      - postgresdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  redis:
+    image: redis:latest
+    container_name: healthy_habit_tracker_redis
+
+  healthy_habit_tracker:
+    container_name: healthy_habit_tracker_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env-non-dev
+    ports:
+    - 7777:8000
+    command:
+      - 'docker/app.sh'
+    depends_on:
+      - db
+      - redis
+
+  celery:
+    container_name: healthy_habit_tracker_celery
+    build: .
+    env_file:
+      - .env-non-dev
+    command:
+      - 'docker/celery.sh'
+    depends_on:
+      - healthy_habit_tracker
+
+  celery_beat:
+    container_name: healthy_habit_tracker_celery_beat
+    build:
+      context: .
+    env_file:
+      - .env-non-dev
+    command:
+      - 'docker/celery_beat.sh'
+    depends_on:
+      - healthy_habit_tracker
+
+volumes:
+  postgresdata:
