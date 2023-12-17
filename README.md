@@ -21,6 +21,7 @@ Healthy Habit Tracker - это веб-приложение, разработан
 - Celery: для асинхронных задач
 - Redis: как брокер сообщений для Celery
 - HTML/CSS: для пользовательского интерфейса
+- Docker: для контейнеризации приложения
 
 
 ## Инструкция по установке
@@ -42,15 +43,11 @@ Healthy Habit Tracker - это веб-приложение, разработан
 
 - SECRET_KEY='КЛЮЧ ОТ DJANGO ПРИЛОЖЕНИЯ'
 - DOMAIN_NAME='НАПРИМЕР <http://127.0.0.1:8000/>'
-- DB_HOST='ХОСТ ДБ НАПРИМЕР <localhost>'
+- POSTGRES_HOST='ХОСТ ДБ НАПРИМЕР <localhost>'
 - POSTGRES_DB='<НАЗВАНИЕ БД>'
 - POSTGRES_USER='<ИМЯ ПОЛЬЗОВАТЕЛЯ БД>'
 - POSTGRES_PASSWORD='<ПАРОЛЬ ОТ БД>'
-- EMAIL_HOST_USER='<ВАША GMAIL ПОЧТА>'
-- EMAIL_HOST_PASSWORD='<ПАРОЛЬ ПРИЛОЖЕНИЯ ОТ GMAIL ПОЧТЫ>'
 - CACHES_LOCATION='НАПРИМЕР <redis://127.0.0.1:6379>'
-- ADMIN_PASSWORD='<ПАРОЛЬ АДМИНА>'
-- MODERATOR_EMAIL='<ПОЧТА МОДЕРАТОРА>'
 - CELERY_BROKER_HOST='НАПРИМЕР <redis://127.0.0.1:6379/0>'
 - CHAT_ID_ADMIN='<ВАШ ID В ТГ>'
 - TELEGRAM_API_TOKEN='<ВАШ API ТОКЕН ДЛЯ ТЕЛЕГРАММ БОТА>'
