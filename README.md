@@ -81,6 +81,30 @@ Healthy Habit Tracker - это веб-приложение, разработан
   celery -A healthy_habit_tracker worker -l info -P eventlet
   celery -A healthy_habit_tracker beat
   ```
+## Инструкция по Docker:
+
+#### Установите Docker и Docker Compose:
+
+* Установите Docker, следуя инструкциям для вашей операционной
+  системы: [Docker Install](https://docs.docker.com/get-docker/).
+* Установите Docker Compose: [Docker Compose Install](https://docs.docker.com/compose/install/).
+
+#### Запустите приложение:
+
+* Откройте терминал в директории с файлом docker-compose.yml.
+* Выполните следующую команду:
+    ```bash
+        docker-compose up
+
+Docker Compose загрузит образы, создаст и запустит контейнеры для ваших сервисов.
+
+#### Проверьте приложение:
+
+После успешного запуска, ваше приложение Healthy Habit Tracker должно быть доступно по адресу http://localhost:7777.
+
+#### Остановите приложение:
+
+* В терминале, где была запущена команда docker-compose up, нажмите Ctrl+C для остановки контейнеров.
 
 
 ## Автор проекта
