@@ -59,7 +59,7 @@ class Habit(models.Model):
         help_text="вознаграждение для пользователя за выполнение привычки",
     )
     time_to_complete_habit = models.IntegerField(
-        help_text="время, которое предположительно потратит пользователь на выполнение привычки"
+        help_text="время, которое предположительно потратит пользователь на выполнение привычки в минутах"
     )
     is_public = models.BooleanField(
         default=False, help_text="признак публичности привычки"
